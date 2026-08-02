@@ -131,6 +131,130 @@ button:disabled {
   cursor: pointer;
 }
 
+.auth-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgba(3, 43, 65, 0.55);
+}
+
+.auth-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 40px 32px 32px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 20px 60px rgba(3, 43, 65, 0.22);
+}
+
+.auth-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  color: #6b757b;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.auth-modal__title {
+  margin-bottom: 24px;
+  color: #032b41;
+  text-align: center;
+  font-size: 24px;
+}
+
+.auth-modal__guest-button,
+.auth-modal__google-button {
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.auth-modal__guest-button {
+  background-color: #2bd97c;
+  color: #032b41;
+}
+
+.auth-modal__google-button {
+  border: 1px solid #d5d9dc;
+  background-color: white;
+  color: #032b41;
+}
+
+.auth-modal__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #6b757b;
+}
+
+.auth-modal__divider::before,
+.auth-modal__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #d5d9dc;
+}
+
+.auth-modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-modal__label {
+  margin-bottom: 6px;
+  color: #032b41;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.auth-modal__input {
+  width: 100%;
+  height: 44px;
+  margin-bottom: 16px;
+  padding: 0 12px;
+  border: 1px solid #d5d9dc;
+  border-radius: 4px;
+  color: #032b41;
+  font: inherit;
+}
+
+.auth-modal__input:focus {
+  border-color: #2bd97c;
+  outline: 2px solid rgba(43, 217, 124, 0.2);
+}
+
+.auth-modal__submit {
+  max-width: none;
+  margin-top: 4px;
+}
+
+.auth-modal__switch {
+  display: block;
+  margin: 20px auto 0;
+  color: #116be9;
+  font-size: 14px;
+}
+
+.auth-modal__error {
+  margin: -4px 0 16px;
+  color: #c62828;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+
 /* LANDING */
 .landing__wrapper {
   display: flex;
@@ -540,4 +664,9 @@ button:disabled {
   .nav__list--mobile {
     display: none;
   }
+
+  .auth-modal {
+    padding: 36px 20px 24px;
+  }
 }
+
