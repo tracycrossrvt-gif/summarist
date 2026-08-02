@@ -1,4 +1,11 @@
+"use client";
+
+import { useDispatch } from "react-redux";
+import { openAuthModal } from "@/redux/uiSlice";
+
 export default function Hero() {
+  const dispatch = useDispatch();
+
   return (
     <section id="landing">
       <div className="container">
@@ -18,7 +25,13 @@ export default function Hero() {
                 and even people who don’t like to read.
               </div>
 
-              <button className="btn home__cta--btn">Login</button>
+              <button
+                className="btn home__cta--btn"
+                type="button"
+                onClick={() => dispatch(openAuthModal())}
+              >
+                Login
+              </button>
             </div>
 
             <figure className="landing__image--mask">
