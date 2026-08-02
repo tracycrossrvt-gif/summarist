@@ -247,6 +247,13 @@ button:disabled {
   font-size: 14px;
 }
 
+.auth-modal__error {
+  margin: -4px 0 16px;
+  color: #c62828;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 
 /* LANDING */
 .landing__wrapper {

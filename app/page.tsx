@@ -5,6 +5,7 @@ import Reviews from "@/components/landing/Reviews";
 import Numbers from "@/components/landing/Numbers";
 import LandingFooter from "@/components/landing/LandingFooter";
 
+
 export default function Home() {
   return (
     <>
