@@ -93,10 +93,9 @@ async function handleGuestLogin() {
   try {
     const userCredential = await loginAsGuest();
 
-    console.log("Guest user:", userCredential.user);
     router.push("/for-you");
   } catch (error) {
-    console.error("Guest login failed:", error);
+    setErrorMessage("Failed to log in as a guest.");
   }
 }
 
