@@ -1,5 +1,6 @@
 import type { Book } from "@/interfaces/book.interface";
 import AudioPlayer from "./AudioPlayer";
+import Reader from "./Reader";
 
 interface PlayerPageContentProps {
   book: Book;
@@ -20,18 +21,12 @@ export default function PlayerPageContent({
         </h1>
       </header>
 
-      <article className="player-page__summary">
-        {book.summary
-          .split("\n")
-          .filter((paragraph) => paragraph.trim())
-          .map((paragraph, index) => (
-            <p key={index}>{paragraph.trim()}</p>
-          ))}
-      </article>
+      <Reader summary={book.summary} />
+
       <AudioPlayer
-  audioLink={book.audioLink}
-  title={book.title}
-/>
+        audioLink={book.audioLink}
+        title={book.title}
+      />
     </section>
   );
 }

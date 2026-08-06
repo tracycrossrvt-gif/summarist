@@ -16,6 +16,7 @@ interface BookDetailsProps {
 export default function BookDetails({
   book,
 }: BookDetailsProps) {
+
   return (
     <section className="book-details">
       <div className="book-details__hero">
@@ -94,9 +95,23 @@ export default function BookDetails({
       </div>
 
       <div className="book-details__section">
-        <h2>What&apos;s it about?</h2>
-        <p>{book.bookDescription}</p>
-      </div>
+  <h2>What&apos;s it about?</h2>
+
+  {book.tags.length > 0 && (
+    <div className="book-details__tags">
+      {book.tags.map((tag) => (
+        <span
+          key={tag}
+          className="book-details__tag"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  )}
+
+  <p>{book.bookDescription}</p>
+</div>
 
       <div className="book-details__section">
         <h2>About the author</h2>

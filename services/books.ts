@@ -32,6 +32,7 @@ async function fetchBookById(id: string): Promise<Book> {
     `${BOOK_API_URL}?id=${encodeURIComponent(id)}`
   );
 
+
   if (!response.ok) {
     const errorBody = await response.text();
 
@@ -41,6 +42,7 @@ async function fetchBookById(id: string): Promise<Book> {
   }
 
   return response.json();
+  
 }
 
 export const getSelectedBooks = () =>

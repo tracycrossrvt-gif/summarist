@@ -1,7 +1,12 @@
 "use client";
 
 import { ChangeEvent, useRef, useState } from "react";
-import { FiPause, FiPlay } from "react-icons/fi";
+import {
+  FiPause,
+  FiPlay,
+  FiRotateCcw,
+  FiRotateCw,
+} from "react-icons/fi";
 
 interface AudioPlayerProps {
   audioLink: string;
@@ -17,6 +22,7 @@ export default function AudioPlayer({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [playbackRate, setPlaybackRate] = useState(1);
 
   async function handlePlayPause() {
     const audio = audioRef.current;
@@ -32,14 +38,6 @@ export default function AudioPlayer({
     } else {
       audio.pause();
     }
-  }
-
-  function handleLoadedMetadata() {
-    const audio = audioRef.current;
-
-    if (!audio || !Number.isFinite(audio.duration)) return;
-
-    setDuration(audio.duration);
   }
 
   function handleTimeUpdate() {
@@ -76,6 +74,32 @@ export default function AudioPlayer({
   }
 }
 
+function handleSkip(seconds: number) {
+  const audio = audioRef.current;
+
+  if (!audio || !Number.isFinite(audio.duration)) return;
+
+  const newTime = Math.min(
+    Math.max(audio.currentTime + seconds, 0),
+    audio.duration
+  );
+
+  audio.currentTime = newTime;
+  setCurrentTime(newTime);
+}
+
+function handlePlaybackRateChange(
+  event: ChangeEvent<HTMLSelectElement>
+) {
+  const audio = audioRef.current;
+  const newRate = Number(event.target.value);
+
+  if (!audio) return;
+
+  audio.playbackRate = newRate;
+  setPlaybackRate(newRate);
+}
+
   return (
     <footer className="audio-player">
       <audio
@@ -96,16 +120,38 @@ export default function AudioPlayer({
         <strong>{title}</strong>
       </div>
 
-      <button
-        className="audio-player__play"
-        type="button"
-        onClick={handlePlayPause}
-        aria-label={
-          isPlaying ? "Pause audiobook" : "Play audiobook"
-        }
-      >
-        {isPlaying ? <FiPause /> : <FiPlay />}
-      </button>
+      <div className="audio-player__controls">
+  <button
+    className="audio-player__skip"
+    type="button"
+    onClick={() => handleSkip(-10)}
+    aria-label="Go back 10 seconds"
+  >
+    <FiRotateCcw />
+    <span>10</span>
+  </button>
+
+  <button
+    className="audio-player__play"
+    type="button"
+    onClick={handlePlayPause}
+    aria-label={
+      isPlaying ? "Pause audiobook" : "Play audiobook"
+    }
+  >
+    {isPlaying ? <FiPause /> : <FiPlay />}
+  </button>
+
+  <button
+    className="audio-player__skip"
+    type="button"
+    onClick={() => handleSkip(10)}
+    aria-label="Go forward 10 seconds"
+  >
+    <FiRotateCw />
+    <span>10</span>
+    </button>
+    </div>
 
       <div className="audio-player__timeline">
         <span className="audio-player__time">
@@ -127,6 +173,22 @@ export default function AudioPlayer({
           {formatTime(duration)}
         </span>
       </div>
+
+      <label className="audio-player__speed">
+  <span className="sr-only">Playback speed</span>
+
+  <select
+    value={playbackRate}
+    onChange={handlePlaybackRateChange}
+    aria-label="Playback speed"
+  >
+    <option value={0.75}>0.75×</option>
+    <option value={1}>1×</option>
+    <option value={1.25}>1.25×</option>
+    <option value={1.5}>1.5×</option>
+    <option value={2}>2×</option>
+  </select>
+</label>
     </footer>
   );
 }
